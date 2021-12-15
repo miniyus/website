@@ -124,16 +124,17 @@ class ContributorSearcher
 
             $node = $this->crawler->filter('.Details a')->first();
 
+            if($node->filter('img')->count() != 0) {
 
-            $userUrl = "https://github.com".$node->attr('href');
-            $imageUrl = $node->filter('img')->attr('src');
-            $imageUrl = str_replace("s=40&", "s=160&", $imageUrl);
-            $contributors[] = (object)[
-                'userName' => str_replace("/", "", $node->attr('href')),
-                'userBaseUrl' => $userUrl,
-                'userImage' => $imageUrl,
-            ];
-
+                $userUrl = "https://github.com" . $node->attr('href');
+                $imageUrl = $node->filter('img')->attr('src');
+                $imageUrl = str_replace("s=40&", "s=160&", $imageUrl);
+                $contributors[] = (object)[
+                    'userName' => str_replace("/", "", $node->attr('href')),
+                    'userBaseUrl' => $userUrl,
+                    'userImage' => $imageUrl,
+                ];
+            }
 
         }
 
